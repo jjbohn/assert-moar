@@ -20,7 +20,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Available methods:
+```
+  #assert_valid
+  #refute_valid
+  #assert_validates_presence_of
+  #refute_validates_presence_of
+```
 
 ## Contributing
 
