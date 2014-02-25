@@ -10,12 +10,12 @@ require 'mocha/mini_test'
 require_relative '../lib/minitest/assertions'
 require_relative '../lib/assert_moar'
 
-class ActiveRecordBaseDouble
+class ActiveRecordSpy
   attr_accessor :errors, :property, :property_file_name
 
-  def initialize(assert_valid = [])
+  def initialize(assert_valid = nil)
     @errors = {}
-    @asserts_valid = assert_valid
+    @assert_valid = assert_valid
   end
 
   def valid?
@@ -25,12 +25,10 @@ class ActiveRecordBaseDouble
 
   private
   def apply_errors
-    @asserts_valid.each do |prop|
-      if self.send(prop).nil?
-        @errors[:property] = String.new
-      else
-        @errors.delete(prop)
-      end
+    if !@assert_valid.nil? && self.send(@assert_valid).nil?
+      @errors[:property] = String.new
+    else
+      @errors.delete(:property)
     end
   end
 end
