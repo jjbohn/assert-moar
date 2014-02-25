@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["jjbohn@gmail.com"]
   spec.summary       = %q{Extra assertions for minitest}
   spec.description   = %q{Extra assertions for minitest}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/jjbohn/assert-moar"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
