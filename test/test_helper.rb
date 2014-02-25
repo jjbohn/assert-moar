@@ -11,23 +11,26 @@ require_relative '../lib/minitest/assertions'
 require_relative '../lib/assert_moar'
 
 class ActiveRecordBaseDouble
-  attr_accessor :errors, :property
+  attr_accessor :errors, :property, :property_file_name
 
-  def initialize(assert_valid = true)
+  def initialize(assert_valid = [])
     @errors = {}
-    @assert_valid = assert_valid
-  end
-
-  def property=(value)
-    @property = value
-    @errors[:property] = value.nil? ? String.new : nil if asserts_valid?
+    @asserts_valid = assert_valid
   end
 
   def valid?
-    !@property.nil? || !asserts_valid?
+    apply_errors
+    @errors.empty?
   end
 
-  def asserts_valid?
-    @assert_valid == true
+  private
+  def apply_errors
+    @asserts_valid.each do |prop|
+      if self.send(prop).nil?
+        @errors[:property] = String.new
+      else
+        @errors.delete(prop)
+      end
+    end
   end
 end
