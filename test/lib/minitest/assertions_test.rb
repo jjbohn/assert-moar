@@ -25,6 +25,7 @@ class Minitest::AssertionTest < Minitest::Test
     double = ActiveRecordBaseDouble.new
     double.property = "foo"
     @tc.assert_validates_presence_of(double, :property)
+    assert_equal "foo", double.property
   end
 
   def test_refute_validates_presence_of

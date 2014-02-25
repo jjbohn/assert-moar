@@ -1,16 +1,20 @@
 module MiniTest::Assertions
   def assert_validates_presence_of(object, property)
     assert_valid(object)
+    tmp = object.send("#{property}")
     object.send("#{property}=", nil)
     refute object.valid?, "Expected object not to be valid"
     assert object.errors[property.to_sym], "Expected errors to exist for #{property}"
+    object.send("#{property}=", tmp)
   end
 
   def refute_validates_presence_of(object, property)
     assert_valid(object)
+    tmp = object.send("#{property}")
     object.send("#{property}=", nil)
     assert_valid(object)
     assert_nil object.errors[property.to_sym]
+    object.send("#{property}=", tmp)
   end
 
   def assert_valid(object)
