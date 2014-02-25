@@ -1,4 +1,4 @@
-# Assert::Moar
+# assert-moar
 
 [![Build Status](https://travis-ci.org/jjbohn/assert-moar.png?branch=master)](https://travis-ci.org/jjbohn/assert-moar)
 [![Coverage Status](https://coveralls.io/repos/jjbohn/assert-moar/badge.png?branch=master)](https://coveralls.io/r/jjbohn/assert-moar?branch=master)
