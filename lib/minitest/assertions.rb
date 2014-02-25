@@ -36,16 +36,16 @@ module MiniTest::Assertions
   end
 
   def assert_validates_uniqueness_of(object, property)
-    assert_valid(object)
+    assert_valid object
     object2 = object.clone
     refute object2.valid?, "Expected object not to be valid"
-    assert object2.errors[property.to_sym], "Expected errors to exist for #{property}"
+    refute_nil object2.errors[property.to_sym], "Expected errors to exist for #{property}"
   end
 
   def refute_validates_uniqueness_of(object, property)
-    assert_valid(object)
+    assert_valid object
     object2 = object.clone
-    assert_valid(object2)
+    assert_valid object2
     assert_nil object2.errors[property.to_sym]
   end
 
