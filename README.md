@@ -1,5 +1,6 @@
 # assert-moar
 
+[![Gem Version](https://badge.fury.io/rb/assert-moar.png)](http://badge.fury.io/rb/assert-moar)
 [![Build Status](https://travis-ci.org/jjbohn/assert-moar.png?branch=master)](https://travis-ci.org/jjbohn/assert-moar)
 [![Coverage Status](https://coveralls.io/repos/jjbohn/assert-moar/badge.png?branch=master)](https://coveralls.io/r/jjbohn/assert-moar?branch=master)
 [![Code Climate](https://codeclimate.com/github/jjbohn/assert-moar.png)](https://codeclimate.com/github/jjbohn/assert-moar)
