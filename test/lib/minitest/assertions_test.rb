@@ -10,6 +10,12 @@ class Minitest::AssertionTest < Minitest::Test
     @assertion_count = 1
   end
 
+  def invalid_clone(object)
+    clone = object.class.new(:property)
+    clone.property = nil
+    clone
+  end
+
   def test_assert_valid
     double = spy
     double.property = "foo"
@@ -43,6 +49,21 @@ class Minitest::AssertionTest < Minitest::Test
   def test_refute_validates_attachment_presence_of
     @assertion_count = 3
     @tc.refute_validates_attachment_presence_of(spy, :property)
+  end
+
+  def test_assert_uniqueness_of
+    @assertion_count = 3
+    double = spy
+    double.property = "foo"
+    double.stub(:clone, invalid_clone(double)) do
+      @tc.assert_validates_uniqueness_of(double, :property)
+    end
+    assert_equal "foo", double.property
+  end
+
+  def test_refute_uniqueness_of
+    @assertion_count = 3
+    @tc.refute_validates_uniqueness_of(spy(nil), :property)
   end
 
   def teardown

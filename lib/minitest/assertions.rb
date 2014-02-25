@@ -35,7 +35,21 @@ module MiniTest::Assertions
     object.send("#{property}_file_name=", tmp)
   end
 
-  def assert_valid object
+  def assert_validates_uniqueness_of(object, property)
+    assert_valid(object)
+    object2 = object.clone
+    refute object2.valid?, "Expected object not to be valid"
+    assert object2.errors[property.to_sym], "Expected errors to exist for #{property}"
+  end
+
+  def refute_validates_uniqueness_of(object, property)
+    assert_valid(object)
+    object2 = object.clone
+    assert_valid(object2)
+    assert_nil object2.errors[property.to_sym]
+  end
+
+  def assert_valid(object)
     assert object.valid?, "Expected object to be valid"
   end
 
