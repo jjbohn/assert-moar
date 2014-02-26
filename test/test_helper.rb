@@ -7,28 +7,23 @@ Coveralls.wear!
 
 require 'minitest/autorun'
 require 'mocha/mini_test'
-require_relative '../lib/minitest/assertions'
 require_relative '../lib/assert_moar'
+require_relative 'support/active_model/validations'
+require_relative 'support/active_record/validations'
 
-class ActiveRecordSpy
-  attr_accessor :errors, :property, :property_file_name
+class ActiveRecordDouble
+  attr_accessor :valid, :error_map
 
-  def initialize(assert_valid = nil)
-    @errors = {}
-    @assert_valid = assert_valid
+  def self._validators
+    @@error_map.inject({}) { |hash, (k, v)| hash.merge(k => Array(v.new)) }
+  end
+
+  def initialize(valid: false, error_map: {})
+    @valid = valid
+    @@error_map = error_map.to_h
   end
 
   def valid?
-    apply_errors
-    @errors.empty?
-  end
-
-  private
-  def apply_errors
-    if !@assert_valid.nil? && self.send(@assert_valid).nil?
-      @errors[:property] = String.new
-    else
-      @errors.delete(:property)
-    end
+    @valid == true
   end
 end
