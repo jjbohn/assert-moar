@@ -41,6 +41,17 @@ class AssertMoar::AssertionTest < Minitest::Test
     @tc.refute_validates_uniqueness_of(double, :property)
   end
 
+  def test_assert_validates_absence_of
+    validator = ::ActiveModel::Validations::AbsenceValidator
+    double = ActiveRecordDouble.new(error_map: {property: validator })
+    @tc.assert_validates_absence_of(double, :property)
+  end
+
+  def test_refute_validates_absense_of
+    double = ActiveRecordDouble.new()
+    @tc.refute_validates_absence_of(double, :property)
+  end
+
   def teardown
     assert_equal(@assertion_count, @tc.assertions,
                  "expected #{@assertion_count} assertions to be fired during the test, not #{@tc.assertions}") if @tc.passed?

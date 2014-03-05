@@ -25,6 +25,8 @@ Available methods:
 ```
   #assert_valid
   #refute_valid
+  #assert_validates_absence_of
+  #refute_validates_absence_of
   #assert_validates_presence_of
   #refute_validates_presence_of
   #assert_validates_uniqueness_of

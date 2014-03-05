@@ -19,6 +19,16 @@ module AssertMoar::Assertions
       "#{object} validates presence of #{property}"
   end
 
+  def assert_validates_absence_of(object, property)
+    assert has_validator?(object, property, ::ActiveModel::Validations::AbsenceValidator),
+      "#{object} does not validate the absence of #{property}"
+  end
+
+  def refute_validates_absence_of(object, property)
+    refute has_validator?(object, property, ::ActiveModel::Validations::AbsenceValidator),
+      "#{object} validates absence of #{property}"
+  end
+
   def assert_valid(object)
     assert object.valid?, "Expected object to be valid"
   end
