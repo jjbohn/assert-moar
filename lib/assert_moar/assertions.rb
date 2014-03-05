@@ -39,6 +39,16 @@ module AssertMoar::Assertions
       "#{object} validates the acceptance of #{property}"
   end
 
+  def assert_validates_with_callback(object, callback)
+    assert has_callback_validator?(object, callback),
+      "#{object} does not validate with #{callback}"
+  end
+
+  def refute_validates_with_callback(object, callback)
+    refute has_callback_validator?(object, callback),
+      "#{object} does not validate with #{callback}"
+  end
+
   def assert_valid(object)
     assert object.valid?, "Expected object to be valid"
   end
@@ -54,5 +64,11 @@ module AssertMoar::Assertions
     validators = Array(klass._validators[property])
 
     validators.any? { |v| v.is_a?(validator_class) }
+  end
+
+  def has_callback_validator?(object_or_class, callback)
+    klass = object_or_class.class
+
+    klass._validate_callbacks.any? { |v| v.filter == callback }
   end
 end

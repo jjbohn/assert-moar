@@ -33,6 +33,8 @@ Available methods:
   #refute_validates_presence_of
   #assert_validates_uniqueness_of
   #refute_validates_uniqueness_of
+  #assert_validates_with_callback
+  #refute_validates_with_callback
 ```
 
 ## Contributing

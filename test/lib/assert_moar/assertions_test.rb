@@ -63,6 +63,20 @@ class AssertMoar::AssertionTest < Minitest::Test
     @tc.refute_validates_acceptance_of(double, :property)
   end
 
+  def test_assert_validates_with_callback
+    validator = ::ActiveSupport::Callbacks::Callback.new(:callback)
+    double = ActiveRecordDouble.new(error_map: { callback: validator })
+
+    @tc.assert_validates_with_callback(double, :callback)
+  end
+
+  def test_refute_validates_with_callback
+    validator = ::ActiveSupport::Callbacks::Callback.new(:callback)
+    double = ActiveRecordDouble.new()
+
+    @tc.refute_validates_with_callback(double, :callback)
+  end
+
   def teardown
     assert_equal(@assertion_count, @tc.assertions,
                  "expected #{@assertion_count} assertions to be fired during the test, not #{@tc.assertions}") if @tc.passed?
