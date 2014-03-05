@@ -27,6 +27,8 @@ Available methods:
   #refute_valid
   #assert_validates_presence_of
   #refute_validates_presence_of
+  #assert_validates_uniqueness_of
+  #refute_validates_uniqueness_of
 ```
 
 ## Contributing
