@@ -77,6 +77,16 @@ class AssertMoar::AssertionTest < Minitest::Test
     @tc.refute_validates_with_callback(double, :callback)
   end
 
+  def test_assert_memoizes_method_result
+    double = ActiveRecordDouble.new()
+    @tc.assert_memoizes_method_result(double, :memoized_method)
+  end
+
+  def test_refute_memoizes_method_result
+    double = ActiveRecordDouble.new()
+    @tc.refute_memoizes_method_result(double, :non_memoized_method)
+  end
+
   def teardown
     assert_equal(@assertion_count, @tc.assertions,
                  "expected #{@assertion_count} assertions to be fired during the test, not #{@tc.assertions}") if @tc.passed?

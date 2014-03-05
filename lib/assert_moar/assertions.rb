@@ -57,6 +57,16 @@ module AssertMoar::Assertions
     refute object.valid?, "Expected object to not be valid"
   end
 
+  def assert_memoizes_method_result(object, method)
+    result = object.send(method)
+    assert_same object.send(method), result
+  end
+
+  def refute_memoizes_method_result(object, method)
+    result = object.send(method)
+    refute_same object.send(method), result
+  end
+
   private
   def has_validator?(object_or_class, property, validator_class)
     klass = object_or_class.class

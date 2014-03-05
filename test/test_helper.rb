@@ -28,6 +28,14 @@ class ActiveRecordDouble
     @@error_map = error_map.to_h
   end
 
+  def memoized_method
+    @object ||= BasicObject.new
+  end
+
+  def non_memoized_method
+    BasicObject.new
+  end
+
   def valid?
     @valid == true
   end

@@ -35,6 +35,8 @@ Available methods:
   #refute_validates_uniqueness_of
   #assert_validates_with_callback
   #refute_validates_with_callback
+  #assert_memoizes_method_result
+  #refute_memoizes_method_result
 ```
 
 ## Contributing
